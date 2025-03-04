@@ -58,9 +58,8 @@ class MyClientController extends Controller
         ]);
 
         if ($request->hasFile('client_logo')) {
-            Storage::disk('s3')->delete($client->client_logo);
-            $validated['client_logo'] = $request->file('client_logo')->store('clients', 's3');
-        }
+            $validated['client_logo'] = $request->file('client_logo')->store('clients', 'public'); // Sementara pakai local storage
+        }        
 
         $client->update($validated);
 
